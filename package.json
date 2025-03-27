@@ -7,34 +7,51 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:css": "stylelint '**/*.{css,scss,sass,less}'"
+    "lint:css": "stylelint '**/*.{css,scss,sass,less}'",
+    "prettier:check": "prettier . --check --ignore-unknown",
+    "prettier:fix": "prettier . --write --ignore-unknown"
   },
   "dependencies": {
+    "@gsap/react": "2.1.2",
+    "build-route-tree": "1.0.3",
     "next": "15.2.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@eslint/css": "^0.5.0",
-    "@eslint/eslintrc": "^3.3.1",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@typescript-eslint/eslint-plugin": "^8.27.0",
-    "@typescript-eslint/parser": "^8.27.0",
-    "clsx": "^2.1.1",
-    "eslint": "^9.23.0",
-    "eslint-config-next": "^15.2.3",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "stylelint": "^16.16.0",
-    "stylelint-config-recommended": "^15.0.0",
-    "stylelint-config-standard": "^37.0.0",
-    "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@eslint/css": "0.5.0",
+    "@eslint/eslintrc": "3.3.1",
+    "@svgr/webpack": "8.1.0",
+    "@tailwindcss/postcss": "4",
+    "@types/node": "20",
+    "@types/react": "19",
+    "@types/react-dom": "19",
+    "@typescript-eslint/eslint-plugin": "8.27.0",
+    "@typescript-eslint/parser": "8.27.0",
+    "clsx": "2.1.1",
+    "eslint": "9.23.0",
+    "eslint-config-next": "15.2.3",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-react": "7.37.4",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "prettier": "3.5.3",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "stylelint": "16.16.0",
+    "stylelint-config-recommended": "15.0.0",
+    "stylelint-config-standard": "37.0.0",
+    "tailwind-merge": "3.0.2",
+    "tailwindcss": "4",
+    "typescript": "5"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "endOfLine": "auto",
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ],
+    "tailwindFunctions": [
+      "cn"
+    ]
   }
 }

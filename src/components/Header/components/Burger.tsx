@@ -10,21 +10,17 @@ const BurgerButton: React.FC = () => {
   };
 
   return (
-    <button
-      type="button"
-      className="relative cursor-pointer size-6 transition-all duration-300"
-      onClick={toggleMenu}
-    >
+    <button type="button" className="relative size-6 cursor-pointer transition-all duration-300" onClick={toggleMenu}>
       <span
         className={cn(
-          "absolute w-full bg-gray-800 h-0.5 left-0 bottom-1/2 transition-all translate-y-1/2   duration-300",
-          isOpen && "rotate-45"
+          "absolute bottom-1/2 left-0 h-0.5 w-full translate-y-1/2 bg-gray-800 transition-all duration-300",
+          isOpen && "rotate-45",
         )}
       />
       <span
         className={cn(
-          "absolute w-full bg-gray-800 h-0.5 left-0 bottom-0 bottom-1/2 -mb-1  translate-y-1/2 transition-all duration-300",
-          isOpen && "-rotate-45 mb-0"
+          "absolute bottom-0 bottom-1/2 left-0 -mb-1 h-0.5 w-full translate-y-1/2 bg-gray-800 transition-all duration-300",
+          isOpen && "mb-0 -rotate-45",
         )}
       />
     </button>

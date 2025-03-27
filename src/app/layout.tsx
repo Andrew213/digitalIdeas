@@ -16,7 +16,7 @@ export default function RootLayout({
 }>): React.ReactElement {
   return (
     <html lang="en" className={montserrat.variable}>
-      <body className="flex h-full flex-col ">{children}</body>
+      <body className="flex h-full flex-col bg-blue-100">{children}</body>
     </html>
   );
 }

@@ -1,35 +1,39 @@
+@theme {
+  --color-blue-100: #f4f7f7;
+  --color-gray-800: #504c4a;
 
- @theme {
-    --color-blue-100: #F4F7F7;
-    --color-gray-800: #504C4A;
+  --background-image-texture: url("../assets/img/Texture.png");
 
-    --background-image-texture: url('../assets/img/Texture.png');
+  --font-montserrat: var(--di-font-montserrat);
 
-    --font-montserrat: var(--di-font-montserrat);
+  --text-h1: 48px;
+  --leading-h1: 110%;
+  --font-weight-h1: 600;
 
-    --text-h1: 48px;
-    --text-h1--line-height: 100%;
-    --font-weight-h1: 600;
+  --text-h1-mobile: 24px;
+  --leading-h1-mobile: 110%;
+  --font-weight-h1-mobile: 600;
 
-    --text-h2: 34px;
-    --text-h2--line-height: 110%;
-    --font-weight-h2: 600;
+  --text-h2: 34px;
+  --leading-h2: 110%;
+  --font-weight-h2: 600;
 
-    --text-h3: 28px;
-    --text-h3--line-height: 110%;
-    --font-weight-h3: 600;
+  --text-h3: 28px;
+  --leading-h3: 110%;
+  --font-weight-h3: 600;
 
-    --text-h4: 16px;
-    --text-h4--line-height: 140%;
-    --font-weight-h4: 600;
+  --text-h4: 16px;
+  --leading-h4: 140%;
+  --font-weight-h4: 600;
 
-    --text-text: 20px;
-    --text-text--line-height: 150%;
-    --font-weight-text: 400;
+  --text-h4-mobile: 14px;
+  --leading-h4-mobile: 140%;
+  --font-weight-h4-mobile: 600;
 
- }
+  --text-text: 20px;
+  --leading-text: 150%;
+  --font-weight-text: 400;
 
- @layer components{
-    .h1{
-    }
- }
+  --breakpoint-sm: 330px;
+  --breakpoint-md: 681px;
+}
