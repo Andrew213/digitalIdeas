@@ -37,3 +37,24 @@
   --breakpoint-sm: 330px;
   --breakpoint-md: 681px;
 }
+
+@utility h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--color-gray-800);
+}
+
+@utility h2 {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--color-gray-800);
+}
+
+@utility h2-mobile {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--color-gray-800);
+}

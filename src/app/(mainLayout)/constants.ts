@@ -10,16 +10,6 @@ export const data = {
   ],
 };
 
-// export const navLinks: NavLinkProps[] = [
-//   { title: "О нас", href: routes.about.getRedirectPath() },
-//   { title: "Проекты", href: routes.projects.getRedirectPath() },
-//   { title: "Партнёры", href: routes.partners.getRedirectPath() },
-//   { title: "Блог", href: routes.blog.getRedirectPath() },
-//   { title: "Волонтёрство", href: routes.volunteering.getRedirectPath() },
-//   { title: "Документы", href: routes.documents.getRedirectPath() },
-//   { title: "Контакты", href: routes.contacts.getRedirectPath() },
-// ];
-
 export const mainLinks: NavLinkProps[] = [
   { title: "СТАТЬ ВОЛОНТЁРОМ", href: routes.volunteering.getRedirectPath() },
   { title: "СДЕЛАТЬ ПОЖЕРТВОВАНИЕ", href: routes.donat.getRedirectPath() },

@@ -1,10 +1,11 @@
-import { useState } from "react";
-
 import { cn } from "@/utils/cn";
 
-const BurgerButton: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface Props {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
 
+const BurgerButton: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const toggleMenu = (): void => {
     setIsOpen(!isOpen);
   };

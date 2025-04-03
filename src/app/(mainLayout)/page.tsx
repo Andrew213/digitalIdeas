@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
 
 import { data, mainLinks } from "@/app/(mainLayout)/constants";
 import { InstaSVG, MailSVG, VkSVG } from "@/assets/icons";
@@ -9,17 +8,15 @@ import NavLink from "@/lib/components/NavLink/NavLink";
 import { cn } from "@/utils/cn";
 
 const Home: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
     <>
       <div className="flex size-full flex-col">
-        <div className="flex size-full flex-col border-b-[2px] border-gray-800 max-md:p-10" ref={containerRef}>
-          <div className="flex h-full flex-col justify-between">
-            <h1 className="max-md:font-h1-mobile font-h1 text-h1 max-md:text-h1-mobile leading-h1 max-md:leading-h1-mobile z-10 text-gray-800">
+        <div className="flex size-full flex-col border-b-[2px] border-gray-800 p-20 max-md:p-10">
+          <div className="flex h-full justify-between max-xl:flex-col">
+            <h1 className="max-xl:font-h1-mobile font-h1 text-h1 max-xl:text-h1-mobile leading-h1 max-xl:leading-h1-mobile z-10 max-w-[49px] text-gray-800">
               {data.mainTitle.toUpperCase()}
             </h1>
-            <div className="z-10 flex gap-10">
+            <div className="z-10 flex flex-col gap-10 max-xl:flex-row md:-mr-20">
               <Link href="#">
                 <InstaSVG width={20} className="text-gray-800" />
               </Link>
@@ -32,7 +29,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <ul className="flex flex-col gap-4 max-sm:p-[42px]">
+        <ul className="flex flex-row gap-[clamp(32px,10vw,15rem)] p-20 max-xl:flex-col max-xl:gap-4 max-md:p-[42px]">
           {mainLinks.map(({ href, title }, i) => {
             return (
               <li key={i}>

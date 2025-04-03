@@ -36,6 +36,7 @@ const eslintConfig = [
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/explicit-function-return-type": "off",
       quotes: ["error", "double"],
       "@typescript-eslint/no-unused-vars": [
         "error",

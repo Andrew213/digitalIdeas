@@ -1,9 +1,11 @@
 import type { LinkProps } from "next/link";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type React from "react";
 
 import { ArrowRightSVG } from "@/assets/icons";
 import { cn } from "@/utils/cn";
+import { animatePageOut } from "@/utils/pageAnimations";
 
 export type NavLinkProps = {
   title: React.ReactNode;
@@ -25,13 +27,20 @@ const NavLink: React.FC<NavLinkProps> = ({
   showArrow,
   ...rest
 }) => {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    animatePageOut(href, router);
+  };
+
   return (
-    <Link target={external ? "_blank" : undefined} onClick={onClick} href={href} {...rest}>
-      <div className={cn(showArrow && "flex items-center gap-2")}>
+    <Link target={external ? "_blank" : undefined} onClick={handleClick} href={href} {...rest}>
+      <div className={cn(showArrow && "flex items-center gap-10 max-sm:gap-2")}>
         <span className={cn("max-sm:text-h4-mobile max-sm:font-h4-mobile text-h4 font-h4 text-gray-800", className)}>
           {title}
         </span>
-        {showArrow && <ArrowRightSVG className="shrink-0 max-sm:w-[28px]" />}
+        {showArrow && <ArrowRightSVG className="w-[28px] shrink-0" />}
       </div>
     </Link>
   );
