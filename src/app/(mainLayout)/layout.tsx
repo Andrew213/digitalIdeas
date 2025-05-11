@@ -100,7 +100,7 @@ const Layout: React.FC<Props> = ({ children }) => {
                 {children}
               </div>
 
-              <MainMenu isActive={isMenuOpen} mainContentRef={mainContentRef} />
+              <MainMenu isActive={isMenuOpen} setIsActive={setIsMenuOpen} mainContentRef={mainContentRef} />
             </div>
           }
         </main>

@@ -1,15 +1,16 @@
 import { useEffect, useRef } from "react";
 
 import { navLinks } from "@/app/(mainLayout)/_components/MainMenu/constants";
-import { gsap, useGSAP } from "@/utils/gsap";
 import NavLink from "@/lib/components/NavLink/NavLink";
+import { gsap, useGSAP } from "@/utils/gsap";
 
 interface Props {
   isActive?: boolean;
   mainContentRef?: React.RefObject<HTMLDivElement | null>;
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MainMenu: React.FC<Props> = ({ isActive, mainContentRef }) => {
+const MainMenu: React.FC<Props> = ({ isActive, mainContentRef, setIsActive }) => {
   const linksRef = useRef<HTMLLIElement[]>([]);
 
   const tl = useRef<GSAPTimeline>(null);
@@ -72,7 +73,7 @@ const MainMenu: React.FC<Props> = ({ isActive, mainContentRef }) => {
   }, [isActive]);
 
   return (
-    <div className="hidden p-20 max-md:p-10" ref={navWrapper}>
+    <div className="hidden overflow-hidden p-20 max-md:p-10" ref={navWrapper}>
       <nav>
         <ul className="grid grid-cols-2 grid-cols-[200px_100px] gap-x-[221px] gap-y-5 max-xl:gap-x-20 max-md:grid-cols-1 max-md:gap-y-4">
           {navLinks.map(({ href, title }, i) => {
@@ -80,6 +81,9 @@ const MainMenu: React.FC<Props> = ({ isActive, mainContentRef }) => {
               <li
                 key={i}
                 className="opacity-0"
+                onClick={() => {
+                  setIsActive?.(false);
+                }}
                 ref={(el) => {
                   if (el) {
                     linksRef.current[i] = el;

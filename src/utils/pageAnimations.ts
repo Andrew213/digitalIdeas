@@ -4,7 +4,6 @@ import { gsap } from "@/utils/gsap";
 
 export const animatePageIn = () => {
   const mainContent = document.getElementById("mainContent");
-
   if (mainContent) {
     gsap.to(mainContent, {
       opacity: 1,
@@ -23,22 +22,19 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
       mainContent,
       {
         opacity: 0,
-        y: 100,
         onComplete: () => {
           router.push(href);
         },
       },
       0,
-    )
+    ).to(
+      mainContent,
+      {
+        opacity: 1,
 
-      .to(
-        mainContent,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-        },
-        1,
-      );
+        duration: 1,
+      },
+      1,
+    );
   }
 };

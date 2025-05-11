@@ -34,6 +34,10 @@
   --leading-text: 150%;
   --font-weight-text: 400;
 
+  --text-text-mobile: 14px;
+  --leading-text-mobile: 1200%;
+  --font-weight-text: 400;
+
   --breakpoint-sm: 330px;
   --breakpoint-md: 681px;
 }
