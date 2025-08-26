@@ -1,16 +1,18 @@
 import { useEffect, useRef } from "react";
 
-import { navLinks } from "@/app/(mainLayout)/_components/MainMenu/constants";
+import { navLinks } from "@/components/MainMenu/constants";
 import NavLink from "@/lib/components/NavLink/NavLink";
+import { cn } from "@/utils/cn";
 import { gsap, useGSAP } from "@/utils/gsap";
 
 interface Props {
   isActive?: boolean;
   mainContentRef?: React.RefObject<HTMLDivElement | null>;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  isDark?: boolean;
 }
 
-const MainMenu: React.FC<Props> = ({ isActive, mainContentRef, setIsActive }) => {
+const MainMenu: React.FC<Props> = ({ isActive, mainContentRef, setIsActive, isDark = false }) => {
   const linksRef = useRef<HTMLLIElement[]>([]);
 
   const tl = useRef<GSAPTimeline>(null);
@@ -90,7 +92,13 @@ const MainMenu: React.FC<Props> = ({ isActive, mainContentRef, setIsActive }) =>
                   }
                 }}
               >
-                <NavLink title={title?.toString().toUpperCase()} href={href} className="h2 max-md:h2-mobile" />
+                <NavLink
+                  title={title?.toString().toUpperCase()}
+                  href={href}
+                  className={cn("h2 max-md:h2-mobile", {
+                    "text-blue-100": isDark,
+                  })}
+                />
               </li>
             );
           })}

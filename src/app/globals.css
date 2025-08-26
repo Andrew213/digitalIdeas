@@ -1,21 +1,10 @@
 @import "tailwindcss";
 @import "./theme.css";
-/* :root {
-  --background: red;
-  --foreground: #171717;
-} */
-/* 2F85C3 */
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 html,
 body {
   /* background: var(--background); */
   color: var(--foreground);
   font-family: var(--font-montserrat), sans-serif;
+  height: 100%;
 }

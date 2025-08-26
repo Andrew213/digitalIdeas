@@ -21,7 +21,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </head>
       <body
-        className="flex h-full flex-col bg-blue-100"
+        className="flex min-h-screen flex-col bg-blue-100"
         style={{
           maxHeight: "env(safe-area-inset-bottom)",
         }}

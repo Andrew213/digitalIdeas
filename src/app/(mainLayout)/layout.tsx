@@ -1,18 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
-import MainMenu from "@/app/(mainLayout)/_components/MainMenu/MainMenu";
 import { Vector9SVG, Vector10SVG } from "@/assets/icons";
 import { TexturePNG } from "@/assets/img";
 import Header from "@/components/Header/Header";
+import MainMenu from "@/components/MainMenu/MainMenu";
 import { gsap, useGSAP } from "@/utils/gsap";
 import { animatePageIn } from "@/utils/pageAnimations";
-
-interface Props {
-  children: React.ReactNode;
-}
 
 function tweenProperty(el: HTMLElement, width: number, height: number): void {
   const svgWidth = el.offsetWidth;
@@ -41,7 +37,7 @@ function tweenProperty(el: HTMLElement, width: number, height: number): void {
   });
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const svg1 = useRef<HTMLImageElement>(null);
 
   const svg2 = useRef<HTMLImageElement>(null);
