@@ -2,6 +2,7 @@
   --color-blue-100: #f4f7f7;
   --color-gray-800: #504c4a;
   --color-gray-400: #a4a4a4;
+  --color-yellow-400: #ffde03;
 
   --background-image-texture: url("../assets/img/Texture.png");
 
@@ -19,6 +20,10 @@
   --leading-h2: 110%;
   --font-weight-h2: 600;
 
+  --text-h2-mobile: 20px;
+  --leading-h2-mobile: 100%;
+  --font-weight-h2-mobile: 600;
+
   --text-h3: 28px;
   --leading-h3: 110%;
   --font-weight-h3: 600;
@@ -31,6 +36,14 @@
   --leading-h4-mobile: 140%;
   --font-weight-h4-mobile: 600;
 
+  --text-h5: 16px;
+  --leading-h5: 2.5%%;
+  --font-weight-h5: 400;
+
+  --text-h5-mobile: 14px;
+  --leading-h4-mobile: 140%;
+  --font-weight-h4-mobile: 400;
+
   --text-text: 20px;
   --leading-text: 150%;
   --font-weight-text: 400;
@@ -41,25 +54,51 @@
 
   --breakpoint-sm: 330px;
   --breakpoint-md: 681px;
+
+  --header-height: 102px;
+  --header-height-mobile: 72.53px;
 }
 
 @utility h1 {
   font-size: 48px;
   font-weight: 600;
   line-height: 110%;
-  color: var(--color-gray-800);
+}
+
+@utility height-without-header {
+  min-height: calc(100dvh - var(--header-height));
+}
+@media (max-width: 681px) {
+  .height-without-header {
+    min-height: calc(100dvh - var(--header-height-mobile));
+  }
+}
+@utility h1-mobile {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 110%;
 }
 
 @utility h2 {
   font-size: 34px;
   font-weight: 600;
   line-height: 110%;
-  color: var(--color-gray-800);
 }
 
 @utility h2-mobile {
   font-size: 20px;
   font-weight: 600;
-  line-height: 110%;
-  color: var(--color-gray-800);
+  line-height: 100%;
+}
+
+@utility text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+@utility text-mobile {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
 }
