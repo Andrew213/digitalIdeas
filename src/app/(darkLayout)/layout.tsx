@@ -11,9 +11,9 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const mainContentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div id="wrapper" className="flex flex-col overflow-hidden bg-gray-800 bg-[url(/Texture2.png)] px-32 max-xl:px-4">
+    <div id="wrapper" className="bg-grey-800 flex flex-col overflow-hidden bg-[url(/Texture2.png)] px-32 max-xl:px-4">
       <Header isMenuOpen={isMenuOpen} isDark setIsMenuOpen={setIsMenuOpen} />
-      <main className="min-h-0 flex-1 grow">
+      <main className="height-without-header flex-1 shrink-0 grow basis-auto">
         <div id="mainContent" ref={mainContentRef}>
           {children}
         </div>

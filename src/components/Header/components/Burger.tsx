@@ -17,14 +17,14 @@ const BurgerButton: React.FC<Props> = ({ isOpen, setIsOpen, isDark = false }) =>
         className={cn(
           "absolute bottom-1/2 left-0 mb-1 h-0.5 w-full translate-y-1/2 transition-all duration-300",
           isOpen && "mb-0 rotate-45",
-          isDark ? "bg-gray-400" : "bg-gray-800",
+          isDark ? "bg-grey-400" : "bg-grey-800",
         )}
       />
       <span
         className={cn(
           "absolute bottom-0 bottom-1/2 left-0 -mb-1 h-0.5 w-full translate-y-1/2 transition-all duration-300",
           isOpen && "mb-0 -rotate-45",
-          isDark ? "bg-gray-400" : "bg-gray-800",
+          isDark ? "bg-grey-400" : "bg-grey-800",
         )}
       />
     </button>

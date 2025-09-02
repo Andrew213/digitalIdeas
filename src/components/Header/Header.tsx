@@ -17,7 +17,7 @@ const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen, isDark = false }) 
     <header
       className={cn(
         "flex items-center justify-between border-b-[2px] py-2.5 max-md:py-[15px]",
-        isDark ? "border-gray-400" : "border-gray-800",
+        isDark ? "border-grey-400" : "border-grey-800",
       )}
     >
       <Link href="/" className="flex items-center gap-4">

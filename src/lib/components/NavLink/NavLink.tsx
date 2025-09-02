@@ -37,10 +37,10 @@ const NavLink: React.FC<NavLinkProps> = ({
   return (
     <Link target={external ? "_blank" : undefined} onClick={handleClick} href={href} {...rest}>
       <div className={cn(showArrow && "flex items-center gap-10 max-sm:gap-2")}>
-        <span className={cn("max-sm:text-h4-mobile max-sm:font-h4-mobile text-h4 font-h4 text-gray-800", className)}>
+        <span className={cn("max-sm:text-h4-mobile max-sm:font-h4-mobile text-h4 font-h4 text-grey-800", className)}>
           {title}
         </span>
-        {showArrow && <ArrowRightSVG className="w-[28px] shrink-0" />}
+        {showArrow && <ArrowRightSVG className="w-[28px] shrink-0 fill-[#504C4A]" />}
       </div>
     </Link>
   );

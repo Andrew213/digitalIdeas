@@ -77,13 +77,9 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
       <div className="relative flex h-dvh flex-col px-32 max-xl:px-4">
         <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        <main className="shrink-0 grow basis-auto">
+        <main className="height-without-header shrink-0 grow basis-auto">
           {
-            <div
-              style={{
-                height: "calc(100vh - 112px)",
-              }}
-            >
+            <div>
               <div
                 style={{
                   opacity: 0,

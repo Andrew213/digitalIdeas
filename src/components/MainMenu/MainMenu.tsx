@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import { navLinks } from "@/components/MainMenu/constants";
 import NavLink from "@/lib/components/NavLink/NavLink";
@@ -19,49 +19,36 @@ const MainMenu: React.FC<Props> = ({ isActive, mainContentRef, setIsActive, isDa
 
   const navWrapper = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!tl.current) {
-      tl.current = gsap.timeline({ paused: true });
-    }
-  }, []);
+  useGSAP(() => {
+    const ctx = gsap.context(() => {
+      if (!tl.current && mainContentRef) {
+        tl.current = gsap
+          .timeline({ paused: true })
+          .to(mainContentRef.current, { xPercent: -50, autoAlpha: 0, duration: 0.2 })
+          .set(mainContentRef.current, { display: "none" })
+          .set(navWrapper.current, { display: "block" })
+          .fromTo(
+            linksRef.current,
+            { xPercent: 100, autoAlpha: 0 },
+            { xPercent: 0, autoAlpha: 1, duration: 0.2, stagger: 0.05, ease: "power2.out" },
+            "<",
+          );
 
-  useEffect(() => {
-    if (tl.current && mainContentRef?.current) {
-      const timeLine = tl.current;
-      const mainContent = mainContentRef.current;
+        // очистка инлайнов после закрытия (reverse завершён)
+        tl.current.eventCallback("onReverseComplete", () => {
+          gsap.set([mainContentRef.current, navWrapper.current, ...linksRef.current], {
+            clearProps: "all",
+          });
+        });
+      }
+    }, navWrapper); // scope — корень меню, можно root div
 
-      tl.current.clear();
-
-      timeLine
-        .to(mainContent, {
-          xPercent: -50,
-          opacity: 0,
-          display: "none",
-          delay: 0,
-          duration: 0.2,
-        })
-        .to(navWrapper.current, {
-          display: "block",
-          delay: 0,
-          duration: 0,
-        })
-        .fromTo(
-          linksRef.current,
-          { xPercent: 100, opacity: 0 },
-          {
-            xPercent: 0,
-            opacity: 1,
-            duration: 0.2,
-            stagger: 0.05,
-            ease: "power2.out",
-          },
-          "<",
-        );
-      return (): void => {
-        tl.current!.kill();
-      };
-    }
-  }, []);
+    // ВАЖНО: cleanup useGSAP — тут, снаружи
+    return () => {
+      tl.current?.kill();
+      ctx.revert();
+    };
+  }, [mainContentRef]); // deps по желанию
 
   useGSAP(() => {
     const timeLine = tl.current;

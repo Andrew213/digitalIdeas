@@ -5,202 +5,89 @@ import { ScrollTrigger, SplitText } from "gsap/all";
 import { useRef } from "react";
 import Marquee from "react-fast-marquee";
 
+import { works } from "@/app/(darkLayout)/about/_components/constants";
+import { ArrowRightSVG } from "@/assets/icons";
+import { cn } from "@/utils/cn";
 import { useGSAP } from "@/utils/gsap";
 
 const Page: React.FC = () => {
   const title1 = useRef(null);
   const root = useRef(null);
   const s1 = useRef<HTMLElement>(null);
-  const s2 = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    if (title1.current) {
-      const text = new SplitText(title1.current, { type: "chars, words" });
+    const text = new SplitText(title1.current, { type: "chars, words" });
 
-      gsap.set(text.words, { yPercent: 100, autoAlpha: 0 });
-      gsap.set(title1.current, { opacity: 1 });
-      gsap.to(text.words, {
-        yPercent: 0,
-        autoAlpha: 1,
-        duration: 1.2,
-        stagger: 0.06,
+    gsap.set(text.words, { yPercent: 100, autoAlpha: 0 });
+    gsap.set(title1.current, { opacity: 1 });
+    gsap.to(text.words, {
+      yPercent: 0,
+      autoAlpha: 1,
+      duration: 1.2,
+      stagger: 0.06,
+    });
+
+    const highlights = document.querySelectorAll(".highlight-yellow");
+
+    highlights.forEach((highlight) => {
+      const splitHighlight = new SplitText(highlight, { type: "chars" });
+
+      gsap.to(splitHighlight.chars, {
+        color: "var(--color-yellow-400)",
+        duration: 0.3,
+        stagger: 0.05,
       });
+    });
 
-      const highlights = document.querySelectorAll(".highlight-yellow");
+    gsap
+      .timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: s1.current,
+          start: "top top",
+          pin: s1.current,
+          pinSpacing: false,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+      .to(text.chars, { autoAlpha: 0, yPercent: -100, stagger: 0.06 }, 0)
+      .to(".marquee", { x: "100%", duration: 2 }, 1);
 
-      highlights.forEach((highlight) => {
-        const splitHighlight = new SplitText(highlight, { type: "chars" });
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
-        gsap.to(splitHighlight.chars, {
-          color: "var(--color-yellow-400)",
-          duration: 0.3,
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: ".foo", // Элемент, который будет отслеживаться
-            start: "top bottom", // Анимация срабатывает, когда верх элемента достигнет центра экрана
-            once: true, // Анимация запускается только один раз
-          },
-        });
+    const sections = gsap.utils.toArray<HTMLElement>(".sec");
+
+    sections.forEach((sect, i) => {
+      const isLast = i === sections.length - 1;
+      const animLeft = sect.querySelectorAll(".anim-left");
+      const animFade = sect.querySelectorAll(".anim-fade");
+      const animRight = sect.querySelectorAll(".anim-right");
+
+      const tl = gsap
+        .timeline({ defaults: { ease: "power3.in" } })
+        .fromTo(animFade, { autoAlpha: 0, duration: 0 }, { autoAlpha: 1 }, 0)
+        .fromTo(animLeft, { xPercent: -100, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6 }, 0)
+        .fromTo(animRight, { xPercent: 100, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6 }, 0);
+
+      ScrollTrigger.create({
+        trigger: sect,
+        start: isLast ? "top-=10 top" : "top top",
+        pinSpacing: isLast,
+        pin: isLast ? false : sect,
+        toggleActions: "play reverse play reverse",
+        animation: tl,
       });
-
-      // const highlight = new SplitText(".highlight-yellow", { type: "chars" });
-      // gsap.to(highlight.chars, {
-      //   color: "var(--color-yellow-400)",
-      //   duration: 0.3,
-      //   stagger: 0.05,
-      //   ease: "power3.in",
-      //   scrollTrigger: {
-      //     trigger: ".highlight",
-      //     start: "top center",
-      //   },
-      // });
-
-      // начальные состояния
-      // gsap.set(s2.current, { opacity: 0, yPercent: 4 }); // s2 чуть ниже и скрыт
-      // gsap.set(s1.current, { autoAlpha: 1, yPercent: 0 });
-
-      // gsap
-      //   .timeline({
-      //     defaults: { ease: "none" },
-      //     scrollTrigger: {
-      //       trigger: s1.current,
-      //       start: "top top+=102px",
-      //       end: "+=100%",
-      //       pinSpacing: false,
-      //       endTrigger: s2.current,
-      //       pin: "#wrapper",
-      //       scrub: true,
-      //       markers: true,
-      //       invalidateOnRefresh: true,
-      //     },
-      //   })
-      //   // s1 уезжает вверх и гаснет
-      //   .to(text.chars, { autoAlpha: 0, yPercent: -100, stagger: 0.06 }, 0)
-      //   // // s2 одновременно проявляется и поднимается на место
-      //   .to(s2.current, { opacity: 1, yPercent: 0 }, 1);
-    }
-
-    // const currentIndex = 0;
-    // let animating: boolean;
-    // const swipePanels: Element[] = gsap.utils.toArray(".swipe-section .sec");
-
-    // const splitMap = new Map<HTMLElement, SplitText>();
-
-    // function ensureSplit(el: NodeListOf<HTMLElement>) {
-    //   const animatedTexts: SplitText[] = [];
-    //   el.forEach((el) => {
-    //     let s = splitMap.get(el);
-    //     if (!s) {
-    //       s = new SplitText(el, { type: "chars, words" });
-    //       splitMap.set(el, s);
-    //     }
-    //     animatedTexts.push(s);
-    //   });
-    //   return animatedTexts;
-    // }
-
-    // gsap.set(".y-100 .text-anim", { yPercent: 100, opacity: 0 });
-
-    // const animText: NodeListOf<HTMLElement> = document.querySelectorAll(".text-anim:not(.s1 .text-anim)");
-
-    // animText.forEach((text: HTMLElement) => {
-    //   const s = new SplitText(text, { type: "chars" });
-    //   splitMap.set(text, s);
-    //   gsap.set(s.chars, { yPercent: -150, autoAlpha: 0 });
-    // });
-
-    // const gotoPanel = (index: number, scrollingDown: boolean) => {
-    //   if (animating || index < 0 || index >= swipePanels.length) return;
-
-    //   animating = true;
-    //   currentIndex = index;
-    //   const prev = scrollingDown ? swipePanels[index - 1] : swipePanels[index];
-    //   const target = scrollingDown ? swipePanels[index] : swipePanels[index + 1];
-
-    //   console.log({ prev, target, index, swipePanels });
-
-    //   const prevTextEl = prev.querySelectorAll<HTMLElement>(".text-anim")!;
-    //   const targetTextEl = target.querySelectorAll<HTMLElement>(".text-anim")!;
-    //   const prevSplit = ensureSplit(prevTextEl);
-    //   const targetSplit = ensureSplit(targetTextEl);
-
-    //   const outText = { yPercent: -150, autoAlpha: 0, duration: 0.6, stagger: 0.02 };
-    //   const inText = { yPercent: 0, autoAlpha: 1, duration: 0.6, stagger: 0.02 };
-
-    //   const complete = () => {
-    //     animating = false;
-    //     if (index === swipePanels.length - 1) myObserver.disable();
-    //   };
-
-    //   const tl = gsap.timeline();
-
-    //   if (scrollingDown) {
-    //     prevSplit.forEach((text) => {
-    //       tl.to(text.chars, outText, 0);
-    //     });
-
-    //     targetSplit.forEach((text) => {
-    //       tl.to(text.chars, inText, 1);
-    //     });
-
-    //     tl.to({}, { duration: 0.01, onComplete: complete });
-
-    //     // tl.to(targetSplit.chars, inTextFrom, { ...inTextTo, onComplete: complete })
-    //     // tl.to(prevSplit, outText);
-    //     // ВНИЗ: prev уходит вниз, target заезжает снизу; текст prev — разлёт, текст target — влёт
-    //     // tl.to(prevSplit.chars, outText).to(prev, outPanelDown);
-    //     // .fromTo(targetSplit.chars, inTextFrom, { ...inTextTo, onComplete: complete });
-    //   } else {
-    //     targetSplit.forEach((text) => {
-    //       tl.to(text.chars, outText, 1);
-    //     });
-
-    //     prevSplit.forEach((text) => {
-    //       tl.to(text.chars, inText, 2);
-    //     });
-
-    //     tl.to({}, { duration: 0.01, onComplete: complete });
-    //   }
-    // };
-
-    // const myObserver = ScrollTrigger.observe({
-    //   type: "wheel,touch",
-    //   onUp: () => !animating && gotoPanel(currentIndex + 1, true),
-    //   onDown: () => !animating && gotoPanel(currentIndex - 1, false),
-    //   wheelSpeed: -1, // to match mobile behavior, invert the wheel speed
-    //   tolerance: 10,
-    //   preventDefault: true,
-    //   onPress: (self) => {
-    //     // on touch devices like iOS, if we want to prevent scrolling, we must call preventDefault() on the touchstart (Observer doesn't do that because that would also prevent side-scrolling which is undesirable in most cases)
-    //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    //     ScrollTrigger.isTouch && self.event.preventDefault();
-    //   },
-    // });
-
-    // ScrollTrigger.create({
-    //   trigger: ".swipe-section",
-    //   pin: true,
-    //   start: "top top+=102",
-    //   end: "+=5",
-    //   markers: true,
-    //   onEnterBack: (self) => {
-    //     if (myObserver.isEnabled === false) {
-    //       self.scroll(self.start);
-    //       myObserver.enable();
-    //       gotoPanel(currentIndex - 1, false);
-    //     }
-    //   },
-    // });
+    });
   }, []);
 
   return (
     <div className="swipe-section text-blue-100" id="root" ref={root}>
       <section
         ref={s1}
-        className="sec s1 height-without-header relative border-b-[2px] border-gray-400 p-20 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center max-md:p-10 max-md:px-0"
+        className="s1 height-without-header relative p-20 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center max-md:p-10 max-md:px-0"
       >
-        {/** TEXT 1 */}
-        <div ref={title1} className="opacity-0 max-md:-mt-[102px] max-md:text-center max-sm:max-w-[216px]">
+        <div ref={title1} className="anim-top opacity-0 max-md:-mt-[102px] max-md:text-center max-sm:max-w-[216px]">
           <h1 className="text-anim h1 max-md:h1-mobile mb-2.5 max-md:mb-2 max-md:max-w-full max-md:text-left md:max-w-[535px]">
             ПРИВЕТ! МЫ —
             <span className="highlight-yellow">
@@ -229,9 +116,9 @@ const Page: React.FC = () => {
         </div>
       </section>
 
-      <section className="flex h-dvh flex-col justify-between py-[120px] max-md:py-10">
-        <span className="text-h5 max-md:text-h5-mobile leading-h5 top-0 left-0 text-blue-100">кто мы</span>
-        <h2 className="h2 max-md:h2-mobile font-h ml-auto w-full max-w-[674px] uppercase">
+      <section className="sec flex h-dvh flex-col justify-between py-[120px] max-md:py-10">
+        <span className="text-h5 max-md:text-h5-mobile anim-fade leading-h5 top-0 left-0 text-blue-100">Кто мы</span>
+        <h2 className="h2 max-md:h2-mobile anim-right font-h ml-auto w-full max-w-[674px] uppercase">
           <span className="flex justify-center justify-start max-md:justify-end">
             Мы любим то, <br className="hidden max-md:block" /> что делаем.
           </span>
@@ -240,23 +127,39 @@ const Page: React.FC = () => {
           </span>
         </h2>
         <div className="flex flex-wrap items-center justify-between gap-10 max-md:flex-col-reverse max-md:justify-center">
-          <p className="h2 max-md:h2-mobile w-full max-w-[280px] uppercase">
+          <p className="h2 max-md:h2-mobile anim-left w-full max-w-[280px] uppercase">
             Главное — <span className="contetnt right-0 ml-auto w-fit md:block">желание!</span>
           </p>
 
-          <p className="text max-sm:text-mobile max-md:max-[250px] mr-24 max-w-[560px] max-md:mr-0">
+          <p className="text max-sm:text-mobile max-md:max-[250px] anim-right mr-24 max-w-[560px] max-md:mr-0">
             Наша команда работает без финансовой поддержки, но мы уверены, что много хорошего и качественного можно
             сделать и без денег.
           </p>
         </div>
       </section>
 
-      {/* <section className="sec s3 y-100 border-b-[2px] border-gray-400 p-20">
-        <h2 className="text-h1 text-anim font-h1 leading-h1 mb-2.5 max-w-[535px]">
-          CЕКЦИЯ3 <br /> <span className="inline-block w-full text-right"> IT-ВОЛОНТЕРОВ</span>
-        </h2>
-        <span className="text-h4 font-h4 text-anim uppercase">в сфере цифровизации</span>
-      </section> */}
+      <section className="sec relative grid h-dvh py-[120px] max-md:py-10">
+        <span className="text-h5 anim-fade absolute top-[120px] left-0 text-blue-100 max-md:top-10">Что мы делаем</span>
+
+        <ul className="anim-fade m-auto w-full">
+          {works.map((el, i) => {
+            return (
+              <li
+                key={i}
+                className={cn("border-i border-grey-600 flex w-full items-center gap-5 border-t py-10", {
+                  "border-b": i === works.length - 1,
+                })}
+              >
+                <div className="flex w-full max-w-[480px] items-center gap-[30px]">
+                  <ArrowRightSVG className="anim-left size-[35px] shrink-0 fill-amber-500 text-white max-md:w-[27px]" />
+                  <span className="h3 max-md:h3-mobile">{el.title}</span>
+                </div>
+                <span className="text max-sm:text-mobile">{el.text}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </div>
   );
 };

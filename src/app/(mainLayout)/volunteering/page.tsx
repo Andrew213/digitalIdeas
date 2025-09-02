@@ -34,11 +34,11 @@ const mockData = [
 const Page: React.FC = () => {
   return (
     <div className="flex size-full flex-col">
-      <div className="flex size-full flex-col border-b-[2px] border-gray-800 p-20 max-md:p-10">
-        <h2 className="font-h1 text-h1 max-md:font-h1-mobile max-md:text-h1-mobile max-md:leading-h1-mobile mb-10 text-gray-800 uppercase max-md:mb-4">
+      <div className="border-grey-800 flex size-full flex-col border-b-[2px] p-20 max-md:p-10">
+        <h2 className="font-h1 text-h1 max-md:font-h1-mobile max-md:text-h1-mobile max-md:leading-h1-mobile text-grey-800 mb-10 uppercase max-md:mb-4">
           Стать волонтёром
         </h2>
-        <p className="text-text max-md:text-text-mobile max-w-[606px] text-gray-800">
+        <p className="text-text max-md:text-text-mobile text-grey-800 max-w-[606px]">
           Вы можете посмотреть вакансии для наших проектов или заполнить анкету, чтобы мы могли с Вами связаться, когда
           понадобится помощь.
         </p>
@@ -47,8 +47,8 @@ const Page: React.FC = () => {
         {mockData.map((item) => (
           // ТУТ ОСТАНОВИЛСЯ. АНИМИРОВАТЬ ЭЛЕМЕНТЫ ИЗ МАССИВА
           <li key={item.id} className="mt-10 flex w-1/3 items-center gap-2.5 py-10 max-md:py-0">
-            <h3 className="font-h4 text-h4 max-md:font-h4-mobile max-md:text-h4-mobile text-gray-800">{item.title}</h3>
-            <ArrowRightSVG className="w-[37px] shrink-0 max-md:w-[27px]" />
+            <h3 className="font-h4 text-h4 max-md:font-h4-mobile max-md:text-h4-mobile text-grey-800">{item.title}</h3>
+            <ArrowRightSVG className="w-[37px] shrink-0 fill-[#504C4A] max-md:w-[27px]" />
           </li>
         ))}
       </ul>
